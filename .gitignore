@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+<<<<<<< HEAD
 
 # Environments
 .env
@@ -14,6 +15,13 @@ env/
 profile_default/
 ipython_config.py
 
+=======
+.env
+
+# C extensions
+*.so
+
+>>>>>>> origin/main
 # Distribution / packaging
 .Python
 build/
