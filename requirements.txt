@@ -9,5 +9,5 @@ mysql-connector-python # No version specified
 packaging==23.1
 protobuf==4.21.12
 python-dotenv # No version specified
-Werkzeug==2.3.7
-pip
+Werkzeug # No version specified
+pip==23.2.1
