@@ -13,8 +13,8 @@ class db_config:
     # Database configuration
     DB_CONFIG = {
         "host": "aws.connect.psdb.cloud",
-        "user": "zafz6phjytcpfhve54w4",
-        "password": "pscale_pw_Y0GVIeHDQWYmaWGj9paxkjAlrisUbPepwvYVsTYnh39",
+        "user": "q06niscbn0hoz6qhyfcu",
+        "password": "pscale_pw_W0jf53wHc3cOUqQyFJC71ZXQ9CLhGbPts6YH3iGKvcB",
         "database": "mindnex"
     }
 

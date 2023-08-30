@@ -1,12 +1,24 @@
 from flask import Flask, render_template, request, redirect
-from config import db_config
+from dotenv import load_dotenv
+import os
 import mysql.connector
 
 app = Flask(__name__)
+load_dotenv()
 
-# Create a connection to the database
-db_conn = mysql.connector.connect(**db_config.DB_CONFIG)
-db_cursor = db_conn.cursor()
+connection = mysql.connector.connect(
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USERNAME"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME"),
+    autocommit=True,
+    ssl_ca="/etc/ssl/cert.pem",  # Use the correct path to your SSL CA certificate
+    ssl_verify_identity=True
+)
+
+
+# Create a cursor
+db_cursor = connection.cursor()
 
 @app.route('/')
 def index():
@@ -26,14 +38,9 @@ def assessment():
         insert_demography_query = "INSERT INTO Assessment_Demography (age, gender, education, familiarity) VALUES (%s, %s, %s, %s)"
         demography_values = (age, gender, education, familiarity)
 
-        try:
-            db_cursor.execute(insert_demography_query, demography_values)
-            db_conn.commit()
-            print("Data inserted successfully")
-        except mysql.connector.Error as err:
-            print("Error inserting data:", err)
+        db_cursor.execute(insert_demography_query, demography_values)
+        connection.commit()
 
-        return redirect('/')
 
     return render_template('questionaire.html')
 
@@ -50,14 +57,9 @@ def interaction():
         insert_chatbot_cbt_query = "INSERT INTO Assessment_Interaction (chatbot_interaction, cbt_techniques, favorite_techniques) VALUES (%s, %s, %s)"
         chatbot_cbt_values = (chatbot_interaction, cbt_techniques, favorite_techniques)
 
-        try:
-            db_cursor.execute(insert_chatbot_cbt_query, chatbot_cbt_values)
-            db_conn.commit()
-            print("Data inserted successfully")
-        except mysql.connector.Error as err:
-            print("Error inserting data:", err)
+        db_cursor.execute(insert_chatbot_cbt_query, chatbot_cbt_values)
+        connection.commit()
 
-        return redirect('/')
 
     return render_template('questionaire.html')
 
@@ -73,14 +75,8 @@ def privacy_assessment():
         insert_privacy_query = "INSERT INTO Assessment_Privacy (personal_info_sharing, privacy_concerns, trust_level) VALUES (%s, %s, %s)"
         privacy_values = (personal_info_sharing, privacy_concerns, trust_level)
 
-        try:
-            db_cursor.execute(insert_privacy_query, privacy_values)
-            db_conn.commit()
-            print("Privacy assessment data inserted successfully")
-        except mysql.connector.Error as err:
-            print("Error inserting privacy assessment data:", err)
-
-        return redirect('/')
+        db_cursor.execute(insert_privacy_query, privacy_values)
+        connection.commit()
 
     return render_template('questionaire.html')
 
@@ -96,14 +92,8 @@ def recommendation_assessment():
         insert_recommendation_query = "INSERT INTO Assessment_Recommendation (tried_recommendations, trust_recommendations, improvement_suggestions) VALUES (%s, %s, %s)"
         recommendation_values = (tried_recommendations, trust_recommendations, improvement_suggestions)
 
-        try:
-            db_cursor.execute(insert_recommendation_query, recommendation_values)
-            db_conn.commit()
-            print("Recommendation assessment data inserted successfully")
-        except mysql.connector.Error as err:
-            print("Error inserting recommendation assessment data:", err)
-
-        return redirect('/')
+        db_cursor.execute(insert_recommendation_query, recommendation_values)
+        connection.commit()
 
     return render_template('questionaire.html')
 
@@ -121,14 +111,9 @@ def ui_experience_assessment():
         insert_ui_experience_query = "INSERT INTO Assessment_UIExperience (satisfaction_ui, ease_of_use, welcoming_ui, scope_purpose_ui, impact_ui) VALUES (%s, %s, %s, %s, %s)"
         ui_experience_values = (satisfaction_ui, ease_of_use, welcoming_ui, scope_purpose_ui, impact_ui)
 
-        try:
-            db_cursor.execute(insert_ui_experience_query, ui_experience_values)
-            db_conn.commit()
-            print("UI Experience assessment data inserted successfully")
-        except mysql.connector.Error as err:
-            print("Error inserting UI Experience assessment data:", err)
+        db_cursor.execute(insert_ui_experience_query, ui_experience_values)
+        connection.commit()
 
-        return redirect('/')
 
     return render_template('questionaire.html')
 
@@ -148,14 +133,8 @@ def chatbot_model_assessment():
         insert_chatbot_model_query = "INSERT INTO Assessment_ChatbotModel (chatbot_model, personality_engaging, responses_clear, responses_robotic, understood_inputs, irrelevant_responses, error_handling) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         chatbot_model_values = (chatbot_model, personality_engaging, responses_clear, responses_robotic, understood_inputs, irrelevant_responses, error_handling)
 
-        try:
-            db_cursor.execute(insert_chatbot_model_query, chatbot_model_values)
-            db_conn.commit()
-            print("Chatbot Model assessment data inserted successfully")
-        except mysql.connector.Error as err:
-            print("Error inserting Chatbot Model assessment data:", err)
-
-        return redirect('/')
+        db_cursor.execute(insert_chatbot_model_query, chatbot_model_values)
+        connection.commit()
 
     return render_template('questionaire.html')
 
@@ -189,11 +168,9 @@ def handle_emotional_experience():
         interested, distressed, excited, upset, strong, guilty, scared, hostile, enthusiastic, proud, irritable, alert,
         ashamed, inspired, afraid, nervous, determined, attentive, jittery, active)
 
-        print("Insert Query:", insert_query)
-        print("Values:", values)
 
         db_cursor.execute(insert_query, values)
-        db_conn.commit()
+        connection.commit()
 
     return render_template('questionaire.html')
 
@@ -206,14 +183,9 @@ def open_ended_feedback():
         # Insert data into the Assessment_Feedback table
         insert_feedback_query = "INSERT INTO Assessment_Feedback (feedback_text) VALUES (%s)"
 
-        try:
-            db_cursor.execute(insert_feedback_query, (feedback_text,))
-            db_conn.commit()
-            print("Feedback inserted successfully")
-        except mysql.connector.Error as err:
-            print("Error inserting feedback:", err)
+        db_cursor.execute(insert_feedback_query, (feedback_text,))
+        connection.commit()
 
-        return redirect('/')
 
     return render_template('questionaire.html')
 
