@@ -1,13 +1,23 @@
 # config.py
 
+#class db_config:
+    # Database configuration
+    #DB_CONFIG = {
+        #"host": "localhost",
+        #"user": "MindNex",
+        #"password": "MindNex",
+        #"database": "MindNex"
+    #}
+
 class db_config:
     # Database configuration
     DB_CONFIG = {
-        "host": "localhost",
-        "user": "MindNex",
-        "password": "MindNex",
-        "database": "MindNex"
+        "host": "aws.connect.psdb.cloud",
+        "user": "zafz6phjytcpfhve54w4",
+        "password": "pscale_pw_Y0GVIeHDQWYmaWGj9paxkjAlrisUbPepwvYVsTYnh39",
+        "database": "mindnex"
     }
+
 
     # Default values
     DEFAULT_AGE = 20
