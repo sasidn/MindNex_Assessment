@@ -1,10 +1,9 @@
 from flask import Flask, render_template, request, redirect
 from dotenv import load_dotenv
+load_dotenv()
 import os
 import mysql.connector
 
-app = Flask(__name__)
-load_dotenv()
 
 connection = mysql.connector.connect(
     host=os.getenv("DB_HOST"),
@@ -12,9 +11,14 @@ connection = mysql.connector.connect(
     password=os.getenv("DB_PASSWORD"),
     database=os.getenv("DB_NAME"),
     autocommit=True,
-    ssl_ca="/etc/ssl/cert.pem",  # Use the correct path to your SSL CA certificate
-    ssl_verify_identity=True
+    ssl_ca="/Users/nissysasidharan/ca.pem",
+    ssl_cert="/Users/nissysasidharan/server-cert.pem",
+    ssl_key="/Users/nissysasidharan/server-key.pem"
 )
+app = Flask(__name__)
+
+
+
 
 
 # Create a cursor
