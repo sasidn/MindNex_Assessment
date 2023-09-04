@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect
 from dotenv import load_dotenv
 #from sqlalchemy import create_engine
-import MySQLdb
+import pymysql
 # Load environment variables from the .env file
 load_dotenv()
 
@@ -10,7 +10,7 @@ load_dotenv()
 #db_url = os.getenv("DATABASE_URL")
 
 # Create the SQLAlchemy engine
-connection = MySQLdb.connect(
+connection = pymysql.connect(
   host= os.getenv("DB_HOST"),
   user=os.getenv("DB_USERNAME"),
   passwd= os.getenv("DB_PASSWORD"),
