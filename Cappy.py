@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 
 # Create a cursor
-db_cursor = connection.cursor()
+#db_cursor = connection.cursor()
 
 @app.route('/')
 def index():
@@ -30,8 +30,8 @@ def assessment():
         insert_demography_query = "INSERT INTO Assessment_Demography (age, gender, education, familiarity) VALUES (%s, %s, %s, %s)"
         demography_values = (age, gender, education, familiarity)
 
-        db_cursor.execute(insert_demography_query, demography_values)
-        connection.commit()
+        #db_cursor.execute(insert_demography_query, demography_values)
+        #connection.commit()
 
 
     return render_template('questionaire.html')
@@ -49,8 +49,8 @@ def interaction():
         insert_chatbot_cbt_query = "INSERT INTO Assessment_Interaction (chatbot_interaction, cbt_techniques, favorite_techniques) VALUES (%s, %s, %s)"
         chatbot_cbt_values = (chatbot_interaction, cbt_techniques, favorite_techniques)
 
-        db_cursor.execute(insert_chatbot_cbt_query, chatbot_cbt_values)
-        connection.commit()
+        #db_cursor.execute(insert_chatbot_cbt_query, chatbot_cbt_values)
+        #connection.commit()
 
 
     return render_template('questionaire.html')
@@ -67,8 +67,8 @@ def privacy_assessment():
         insert_privacy_query = "INSERT INTO Assessment_Privacy (personal_info_sharing, privacy_concerns, trust_level) VALUES (%s, %s, %s)"
         privacy_values = (personal_info_sharing, privacy_concerns, trust_level)
 
-        db_cursor.execute(insert_privacy_query, privacy_values)
-        connection.commit()
+        #db_cursor.execute(insert_privacy_query, privacy_values)
+        #connection.commit()
 
     return render_template('questionaire.html')
 
@@ -84,8 +84,8 @@ def recommendation_assessment():
         insert_recommendation_query = "INSERT INTO Assessment_Recommendation (tried_recommendations, trust_recommendations, improvement_suggestions) VALUES (%s, %s, %s)"
         recommendation_values = (tried_recommendations, trust_recommendations, improvement_suggestions)
 
-        db_cursor.execute(insert_recommendation_query, recommendation_values)
-        connection.commit()
+       # db_cursor.execute(insert_recommendation_query, recommendation_values)
+        #connection.commit()
 
     return render_template('questionaire.html')
 
@@ -103,8 +103,8 @@ def ui_experience_assessment():
         insert_ui_experience_query = "INSERT INTO Assessment_UIExperience (satisfaction_ui, ease_of_use, welcoming_ui, scope_purpose_ui, impact_ui) VALUES (%s, %s, %s, %s, %s)"
         ui_experience_values = (satisfaction_ui, ease_of_use, welcoming_ui, scope_purpose_ui, impact_ui)
 
-        db_cursor.execute(insert_ui_experience_query, ui_experience_values)
-        connection.commit()
+        #db_cursor.execute(insert_ui_experience_query, ui_experience_values)
+        #connection.commit()
 
 
     return render_template('questionaire.html')
@@ -125,8 +125,8 @@ def chatbot_model_assessment():
         insert_chatbot_model_query = "INSERT INTO Assessment_ChatbotModel (chatbot_model, personality_engaging, responses_clear, responses_robotic, understood_inputs, irrelevant_responses, error_handling) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         chatbot_model_values = (chatbot_model, personality_engaging, responses_clear, responses_robotic, understood_inputs, irrelevant_responses, error_handling)
 
-        db_cursor.execute(insert_chatbot_model_query, chatbot_model_values)
-        connection.commit()
+       # db_cursor.execute(insert_chatbot_model_query, chatbot_model_values)
+       # connection.commit()
 
     return render_template('questionaire.html')
 
@@ -161,8 +161,8 @@ def handle_emotional_experience():
         ashamed, inspired, afraid, nervous, determined, attentive, jittery, active)
 
 
-        db_cursor.execute(insert_query, values)
-        connection.commit()
+        #db_cursor.execute(insert_query, values)
+        #connection.commit()
 
     return render_template('questionaire.html')
 
@@ -175,8 +175,8 @@ def open_ended_feedback():
         # Insert data into the Assessment_Feedback table
         insert_feedback_query = "INSERT INTO Assessment_Feedback (feedback_text) VALUES (%s)"
 
-        db_cursor.execute(insert_feedback_query, (feedback_text,))
-        connection.commit()
+        #db_cursor.execute(insert_feedback_query, (feedback_text,))
+        #connection.commit()
 
 
     return render_template('questionaire.html')
