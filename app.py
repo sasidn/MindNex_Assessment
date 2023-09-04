@@ -10,7 +10,8 @@ load_dotenv()
 db_url = os.getenv("DATABASE_URL")
 
 # Create the SQLAlchemy engine
-engine = create_engine(db_url, echo=True)
+engine = create_engine(db_url,connect_args={"ssl": {"ssl_ca": "/etc/ssl/cert.pem"}
+})
 app = Flask(__name__)
 
 @app.route('/')
